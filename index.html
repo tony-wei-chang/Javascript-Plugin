@@ -1,0 +1,94 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>雲端進銷存系統</title>
+  <Link rel="SHORTCUT ICON"  href="image/newLogo.png" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="css/css.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css">
+  <script type="text/javascript" src="js/jquery/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="js/jquery/jquery.datetimepicker.full.min.js"></script>
+  <script src="js/jquery/jquery.ui.widget.js"></script>
+  <script src="js/jquery/jquery.iframe-transport.js"></script>
+  <script src="js/jquery/jquery.fileupload.js"></script>
+  <script src="js/jquery/jquery.filedoneload.js"></script>
+  <script type="text/javascript" src="js/view.js"></script>
+  <script type="text/javascript" src="js/func.js"></script>
+  <script type="text/javascript" src="js/debug.js"></script>
+  <script type='text/javascript' src="js/jquery/jquery.s2t.js"></script>
+  <!-- tab -->
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <script src="js/jquery/jquery-ui.js"></script>
+  <!-- tab -->
+  <!-- ImgSlider -->
+  <link rel="stylesheet" href="css/imgSlider/flexslider.css" type="text/css" media="screen" />
+  <script src="js/imgSlider/modernizr.js"></script>
+  <script src="js/imgSlider/jquery.flexslider.js"></script>
+  <!-- ImgSlider -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-60703878-2', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+<body>
+  <div id="headerProcess" style="height:2px;position:absolute;background-color:white;"></div>
+  <script type="text/javascript">
+    //分成幾種階段 DOMready 登入 取得權限 八個套件 everything-loaded
+    var Y02_TotalStage = 12;
+    var Y02_CurrentStage = 1;
+    //進度條
+    function goProcess()
+    {
+      //更新進度條
+      $('#headerProcess').width((Y02_CurrentStage/Y02_TotalStage*100) + "%");
+      //如果都完成了
+      if(Y02_CurrentStage >= Y02_TotalStage)
+      {
+        //一秒後消失進度條
+        $("#headerProcess").fadeTo(1000, 0);
+        setTimeout(function()
+        {
+          $("#headerProcess").remove();
+        },1000)
+      }
+      //進入下一個階段
+      else
+      {
+        Y02_CurrentStage++;
+      }
+    }
+    ctrlKey = false;
+    shiftKey = false;
+    //Time until DOMready
+    $(document).ready(function()
+    {
+      goProcess();
+      $("body").keydown(function(e)
+      {
+        if(e.ctrlKey)
+        {
+          ctrlKey = true;
+        }
+        if(e.shiftKey)
+        {
+          shiftKey = true;
+        }
+      });
+      $("body").keyup(function(e)
+      {
+        ctrlKey = false;
+        shiftKey = false;
+      });
+    });
+    //Time until everything loaded
+    $(window).load(function()
+    {
+      goProcess();
+    });
+  </script>
+</body>
+</html>
